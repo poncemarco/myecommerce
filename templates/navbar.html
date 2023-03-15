@@ -42,7 +42,7 @@
                   <!-- <span class="input-group-prepend">
                       <div class="input-group-text bg-secondary text-white border-right-0"><i class="fa fa-search"></i></div>
                   </span> -->
-                  <input name="search_query" class="form-control py-2 border-left-0 border" style="width: 320px" placeholder="Digite sua busca..." type="search" value="{{query_str}}" id="search_query">
+                  <input name="search_query" class="form-control py-2 border-left-0 border" style="width: 320px" placeholder="Digite su busqueda..." type="search" value="{{query_str}}" id="search_query">
                     <!-- onkeypress="if(this.value.length==0){document.getElementById('search_button').disabled = true;}else{document.getElementById('search_button').disabled = false;}"> -->
                   <span class="input-group-append">
                     <button id="search_button" class="btn bg-primary btn-outline-light bg-border-left-0 border" type="submit">
@@ -62,13 +62,13 @@
         <li class="nav-item">
           <a class="nav-link waves-effect" href="{% url 'account_logout' %}">
             <i class="fas fa-sign-in-alt text-danger"></i>
-            <span class="clearfix d-sm-inline-block"> Sair </span>
+            <span class="clearfix d-sm-inline-block"> Salir </span>
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link waves-effect" href="{% url 'profile-user-data' %}">
             <i class="fas fa-user-circle text-white"></i>
-            <span class="clearfix d-sm-inline-block"> Meu Perfil </span>
+            <span class="clearfix d-sm-inline-block"> Mi Perfil </span>
           </a>
         </li>
         {% else %}
@@ -88,7 +88,7 @@
         <li class="nav-item">
           <a class="nav-link waves-effect" href="{% url 'mycart' %}">
             <i class="fas fa-shopping-cart text-warning"></i>
-            <span class="clearfix d-sm-inline-block"> Carrinho </span>
+            <span class="clearfix d-sm-inline-block"> Carrito </span>
             <span class="badge bg-danger text-white z-depth-1 mr-1" style="width: 25px"> {{ request|count_cart_items }} </span>
           </a>
         </li>

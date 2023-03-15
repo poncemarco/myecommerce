@@ -10,12 +10,9 @@ from threading import Lock
 from . import utils
 lock = Lock()
 
-# model/form name followed by names sent by process-payment.js (received as query_dict in the view)
-# if the name is the same is not necessary to include here
-FIELD_NAME_MAPPING = {
-    'doc_type': 'type',
-    'doc_number': 'number',
-}
+
+
+
 
 class PaymentForm(forms.ModelForm):
     token = forms.CharField(required=False)
@@ -29,8 +26,6 @@ class PaymentForm(forms.ModelForm):
             "installments",
             "payment_method_id",
             "email",
-            "doc_type",
-            "doc_number",
             "card_holder",
         ]
 
@@ -53,7 +48,7 @@ class PaymentForm(forms.ModelForm):
         # print(transaction_amount, total)
         if transaction_amount != float(total):
             raise forms.ValidationError(
-                "Negado! Valor da transação difere do valor da compra!"
+                "Negado! Valor de transacción es diferente a la de compra!"
             )
         return total
 
@@ -72,14 +67,14 @@ class PaymentForm(forms.ModelForm):
             while f"{product.slug}_{product.pk}" in self.lista_lock:
                 time.sleep(0.2)
                 if count >= 5: # timeout
-                    return False, 'Algo deu errado no pagamento ou o produto já foi vendido e saiu de estoque. Verifique e tente novamente.'
+                    return False, 'Algo ha ido mal con el pago o el producto ya se ha vendido y está agotado. Compruébalo e inténtalo de nuevo.'
                 else:
                     count += 0.2
             # if the product left the lista_lock so the user that locked it finalized its order and it is necessary to read the product again
             product = Item.objects.get(slug=orderitem.item.slug, pk=orderitem.item.pk)
             # if the stock is less than the order quantity so other user buyed the available units
             if product.quantity < orderitem.quantity:
-                return False, 'Infelizmente o produto já foi vendido e saiu de estoque.'
+                return False, 'Lamentablemente, el producto ya se ha vendido y está agotado.'
             # if the product is available it is added in the lista_lock list to indicate it is being negotiated
             self.lista_lock.append(f"{product.slug}_{product.pk}")
             # self.lista_lock[self.order.user.username].append(f"{product.slug}_{product.pk}")
@@ -107,17 +102,18 @@ class PaymentForm(forms.ModelForm):
                 "installments": int(cd['installments']),
                 "payment_method_id": cd['payment_method_id'],
                 "payer": {
-                    "first_name": cd['card_holder'],
-                    "email": cd['email'],
-                    "identification": {
-                        "type": cd['doc_type'],
-                        "number": cd['doc_number']},
-                },
+                    "first_name": "customer",
+                    "id" : cd['id']
+                    #,
+                #     "identification": {
+                #         "type": cd['doc_type'],
+                #         "number": cd['doc_number']},
+                 },
             }
 
             payment = sdk.payment().create(payment_data)
             if payment["status"] == 500:
-                msg = "Erro interno com o servidor da pagadora. Recarregue e tente novamente. Caso o erro persista, entre em contato conosco."
+                msg = "Error interno con el servidor del pagador. Vuelva a cargar e inténtelo de nuevo. Si el error persiste, póngase en contacto con nosotros."
                 return msg
 
             elif payment["status"] == 201:
@@ -161,15 +157,15 @@ class PaymentForm(forms.ModelForm):
                     # if queue: queue.put(msg) # just for testing with threads
                     return msg
                 else:
-                    msg = 'Aconteceu algum erro inesperado. Verifique os dados e tente novamente.'
+                    msg = 'Se ha producido un error inesperado. Por favor, compruebe los datos e inténtelo de nuevo.'
                     # if queue: queue.put(msg) # just for testing with threads
                     return msg
             
         except OperationalError as error:
-            return 'Infelizmente o produto já foi vendido e saiu de estoque.'
+            return 'Lamentablemente, el producto ya se ha vendido y está agotado.'
         except Exception as error:
             print(traceback.format_exc())
-            return 'Ocorreu algum erro com o pagamento ou o produto saiu de estoque. Verifique e tente novamente'
+            return 'Se ha producido un error en el pago o el producto está agotado. Compruébelo e inténtelo de nuevo'
         finally:
             # removing the products from the lock to others subsequents users
             # lock.acquire()

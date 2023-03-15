@@ -33,7 +33,7 @@ class OrderAdmin(admin.ModelAdmin):
     def link_to_user(self, obj):
         link = reverse("admin:auth_user_change", args=[obj.user_id])
         return format_html('<a href="{}">{}</a>', link, obj.user.username)
-    link_to_user.short_description = 'Usuário'
+    link_to_user.short_description = 'Usuario'
 
     def link_to_id(self, obj):
         link = reverse("admin:main_app_order_change", args=[obj.id])
@@ -43,12 +43,12 @@ class OrderAdmin(admin.ModelAdmin):
     def link_to_billing_address(self, obj):
         link = reverse("admin:main_app_billingaddress_change", args=[obj.billing_address.id])
         return format_html('<a href="{}">{}</a>', link, obj.billing_address)
-    link_to_billing_address.short_description = 'Endereço'
+    link_to_billing_address.short_description = 'Dirección'
 
     def link_to_payment(self, obj):
         link = reverse("admin:mercadopago_payment_payment_change", args=[obj.payment.id])
         return format_html('<a href="{}">{}</a>', link, obj.payment.mercado_pago_id)
-    link_to_payment.short_description = 'Pagamento (M. Pago ID)'
+    link_to_payment.short_description = 'Pago (M. Pago ID)'
 
     # def link_to_coupon(self, obj):
     #     if obj:
@@ -101,7 +101,7 @@ class OrderItemAdmin(admin.ModelAdmin):
     def link_to_user(self, obj):
         link = reverse("admin:auth_user_change", args=[obj.user_order.user_id])
         return format_html('<a href="{}">{}</a>', link, obj.user_order.user.username)
-    link_to_user.short_description = 'Usuário'
+    link_to_user.short_description = 'Usuario'
 
     def link_to_order(self, obj):
         link = reverse("admin:main_app_order_change", args=[obj.user_order.id])

@@ -6,15 +6,15 @@
 {% block content %}
 
 <div class="mt-5 table-responsive text-nowrap container">
-    <h2 class="text-center">Carrinho</h2>
+    <h2 class="text-center">Carrito</h2>
     <table class="table">
         <thead>
         <tr class="text-center">
             <th scope="col" style="width: 5%">#</th>
-            <th scope="col" style="width: 18%">Imagem</th>
+            <th scope="col" style="width: 18%">Imagen</th>
             <th scope="col" style="width: 18%">Produto</th>
-            <th scope="col" style="width: 18%">Preço</th>
-            <th scope="col" style="width: 18%">Quantitade</th>
+            <th scope="col" style="width: 18%">Precio</th>
+            <th scope="col" style="width: 18%">Cantidad</th>
             <th scope="col" style="width: 18%">Total</th>
             <th scope="col" style="width: 5%"></th>
         </tr>
@@ -51,9 +51,9 @@
                         <i class="update-cart fas fa-plus ml-2" style='color: lightgray;'></i>
                     {% endif %}
                     {% if order_item.item.quantity < order_item.quantity %}
-                        <div style="color: red;">Disponíveis: {{ order_item.item.quantity }}</div>
+                        <div style="color: red;">Disponibles: {{ order_item.item.quantity }}</div>
                     {% else %}
-                        <div>Disponíveis: {{ order_item.item.quantity }}</div>
+                        <div>Disponibles: {{ order_item.item.quantity }}</div>
                     {% endif %}
                     
                 </div>
@@ -77,7 +77,7 @@
         </tr>
         {% empty %}
         <tr>
-            <td class='text-center' colspan='6'>Carrinho vazio!</td>
+            <td class='text-center' colspan='6'>Carrito vacio</td>
         </tr>
         <tr>
             <td colspan="7">
@@ -88,7 +88,7 @@
         
         {% if user_order.coupon %}
         <tr>
-            <td colspan="5" style="vertical-align: middle;"><b>Cupom Aplicado: </b><small class="text-success">{{ user_order.coupon.code }}</small></td>
+            <td colspan="5" style="vertical-align: middle;"><b>Cupón Aplicado: </b><small class="text-success">{{ user_order.coupon.code }}</small></td>
             <td class="text-center" style="vertical-align: middle;"><b>-{{ user_order.coupon.amount|currency_format }}</b></td>
             <td>
                 <form class="" method="POST" action="{% url 'remove-coupon' 'mycart' %}">
@@ -101,7 +101,7 @@
 
         {% if user_order.get_total %}
         <tr>
-            <td colspan="6"><b>Total do carrinho</b></td>
+            <td colspan="6"><b>Total de carrito</b></td>
             <td><b>{{ user_order.get_total|currency_format }}</b></td>
         </tr>
         <tr>

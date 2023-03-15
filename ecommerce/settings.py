@@ -145,15 +145,15 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'pt-BR'
-CURRENCY = 'BRL'
+LANGUAGE_CODE = 'es-MX'
+CURRENCY = 'MXN'
 
 # https://www.mercadopago.com.br/ajuda/minimo-maximo-posso-pagar-pelo_324
 MERCADOPAGO_MAXVALUE_CREDITCARD = 60000.0
 MERCADOPAGO_MINVALUE_CREDITCARD = 0.5
 
 
-TIME_ZONE = 'America/Sao_Paulo'
+TIME_ZONE = 'America/Mexico_City'
 
 USE_I18N = True
 
@@ -201,5 +201,5 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
-MERCADO_PAGO_PUBLIC_KEY = os.environ.get("MERCADO_PAGO_PUBLIC_KEY", default="")
-MERCADO_PAGO_ACCESS_TOKEN = os.environ.get("MERCADO_PAGO_ACCESS_TOKEN", default="")
+MERCADO_PAGO_PUBLIC_KEY = 'TEST-4eb2e938-8d0c-4e6d-9d78-67e25b652b8a'
+MERCADO_PAGO_ACCESS_TOKEN = 'TEST-695670945642894-030117-d27e79be03e0fa2638ee98e9bc57e5ef-258502670'

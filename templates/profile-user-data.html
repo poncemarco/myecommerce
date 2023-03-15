@@ -7,7 +7,7 @@
     <div class="container wow fadeIn">
 
       <!-- Heading -->
-      <h2 class="my-5 h2 text-center">Sua Conta</h2>
+      <h2 class="my-5 h2 text-center">Su Cuenta</h2>
 
       {% include 'profile-menu.html' %}
 
@@ -18,8 +18,8 @@
               {% csrf_token %}
               {{ user_form|crispy }}
               <div>
-                <a class="float-left btn btn-dark btn-lg" href="{% url 'account_change_password' %}">Mudar senha</a>
-                <button class="float-right btn btn-primary btn-lg" type="submit">Salvar alterações</button>
+                <a class="float-left btn btn-dark btn-lg" href="{% url 'account_change_password' %}">Cambiar contraseña</a>
+                <button class="float-right btn btn-primary btn-lg" type="submit">Guardar cambios</button>
               </div>
             </form>
           </div>

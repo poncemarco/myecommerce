@@ -6,7 +6,7 @@
     {% with total_price=order.get_total %}
 
     <div class="container mt-5">
-        <h1 class="font-weight-bold text-center mb-3">Pagamento com cartão de crédito</h1>
+        <h1 class="font-weight-bold text-center mb-3">Pago con tarjeta de Crédito</h1>
         <div class="row">
             <div class="col-lg-6" style="border: 0px solid">
                 {% if form.errors %}
@@ -33,7 +33,7 @@
                         <div class="form-group col-12 mb-0">
                             <div class="row">
                                 <div class="form-group col-8">
-                                    <!-- <label for="form-checkout__cardNumber">Número do Cartão</label> -->
+                                    <!-- <label for="form-checkout__cardNumber">Número de tarjeta</label> -->
                                     <!-- <input type="text" name="cardNumber" id="form-checkout__cardNumber" class="form-control"/> -->
                                     <!-- <input id="form-checkout__cardNumber" type="text" class="form-control" value="4235647728025682" /> -->
                                     <input id="form-checkout__cardNumber" type="text" class="form-control" />
@@ -74,20 +74,20 @@
                     </div>
                     
     
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="form-group col-12 mb-0">
                             <div class="row">
                                 <div class="form-group col-3">
                                     <select name="identificationType" class="form-control" id="form-checkout__identificationType"></select>
                                 </div>
                                 <div class="form-group col-9">
-                                    <!-- <input type="text" name="identificationNumber" class="form-control" id="form-checkout__identificationNumber" value="09800775838" /> -->
+                                    <input type="text" name="identificationNumber" class="form-control" id="form-checkout__identificationNumber" value="09800775838" />
                                     <input type="text" name="identificationNumber" class="form-control" id="form-checkout__identificationNumber" />
-                                    <!-- value="{{ order.user.userprofile.cpf }}" -->
+                                    value="{{ order.user.userprofile.cpf }}"
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     
                     <div class="form-group">
                         <select name="installments" class="form-control" id="form-checkout__installments"></select>
@@ -95,7 +95,7 @@
 
                     <button type="submit" id="form-checkout__submit" class="btn btn-success btn-lg btn-block">Pagar</button>
                     <div class="form-group">
-                        <progress value="0" class="progress-bar" style="width: 100%; background-color: revert;">Processando...</progress>
+                        <progress value="0" class="progress-bar" style="width: 100%; background-color: revert;">Procesando...</progress>
                     </div>
                     
                     <input type="hidden" id="transaction_amount" name="transaction_amount" value='{{ total_price|stringformat:".2f" }}'/>

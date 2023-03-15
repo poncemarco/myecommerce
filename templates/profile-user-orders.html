@@ -7,7 +7,7 @@
     <div class="container wow fadeIn">
 
       <!-- Heading -->
-      <h2 class="my-5 h2 text-center">Sua Conta</h2>
+      <h2 class="my-5 h2 text-center">Su Cuenta</h2>
 
       {% include 'profile-menu.html' %}
 
@@ -28,51 +28,51 @@
                   {% endfor %}
 
                   {% if user_order.finished_date %}
-                    <div class="card-text float-right">Finalizado em: {{ user_order.finished_date }}</div>
+                    <div class="card-text float-right">Finalizado en: {{ user_order.finished_date }}</div>
                   {% else %}
-                    <div class="card-text float-right">Finalizado em: Não finalizado</div>
+                    <div class="card-text float-right">Finalizado en: No finalizado</div>
                   {% endif %}
 
-                  <div class="card-text float-right" style="clear: both;"><b>Andamento</b>:
+                  <div class="card-text float-right" style="clear: both;"><b>Progreso</b>:
                     {% if user_order.on_the_road and not user_order.delivered %}
-                      A caminho.
+                      A camino.
                     {% elif user_order.delivered %}
-                      Pedido entregue.
+                      Pedido entregado
                     {% elif user_order.paid %}
-                      Pedido em separação.
+                      Pedido en proceso
                     {% else %}
-                      Aguardando pagamento.
+                      Esperando pago 
                     {% endif %}
                   </div>
 
 
                   <div id="order_info{{forloop.counter}}" style="display: none;">
-                    <div class="card-text">Data de início: {{ user_order.start_date }}</div>
+                    <div class="card-text">Fecha de início: {{ user_order.start_date }}</div>
 
-                    <div class="card-text">Endereço de Entrega:</div>
+                    <div class="card-text">Dirección de Entrega:</div>
                       <div class="card-text ml-3">- {{ user_order.billing_address.address }}, {{ user_order.billing_address.number }} - {{ user_order.billing_address.zipcode }}</div>
                       <div class="card-text ml-3">- {{ user_order.billing_address.city }}, {{ user_order.billing_address.state }}</div>
 
                     <div class="card-text">Valor total: <b>{{ user_order.get_total|currency_format }}</b></div>
-                    <div class="card-text">Pagamento:
+                    <div class="card-text">Pago:
                     {% if user_order.payment.mercado_pago_id %}
-                      <div class="card-text ml-3">- Cartão: {{ user_order.payment.payment_method_id }} - Parcelas: {{ user_order.payment.installments }} - Status: {{ user_order.payment.mercado_pago_status }}</div>
+                      <div class="card-text ml-3">- Carjeta: {{ user_order.payment.payment_method_id }} - Parcelas: {{ user_order.payment.installments }} - Status: {{ user_order.payment.mercado_pago_status }}</div>
                       </div>
                     {% else %}
-                        Não efetuado.</div>
+                        No efectuado.</div>
                     {% endif %}
 
                     {% if user_order.coupon %}
-                      <div class="card-text">CUPOM utilizado: {{ user_order.coupon }}</div>
+                      <div class="card-text">CUPON utilizado: {{ user_order.coupon }}</div>
                     {% endif %}
 
                     {% if user_order.refund_requested %}
-                      <div class="card-text">Pedido de refundo: Sim</div>
+                      <div class="card-text">Pedido de devolución: Si</div>
                     {% elif not user_order.refund_requested %}
-                      <div class="card-text">Pedido de refundo: Não</div>
+                      <div class="card-text">Pedido de devolución: No</div>
                     {% endif %}
                     {% if user_order.payment.mercado_pago_id %}
-                      <a class="float-right btn btn-dark btn-sm" href="{% url 'refund-request' user_order.ref_code %}">Pedir Refundo</a>
+                      <a class="float-right btn btn-dark btn-sm" href="{% url 'refund-request' user_order.ref_code %}">Pedir Devolución</a>
                     {% endif %}
                   </div>
                   

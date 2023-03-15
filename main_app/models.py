@@ -10,18 +10,17 @@ from allauth.account.signals import email_confirmed
 from django.utils.text import slugify
 
 LABEL_OPTIONS = (
-    ('N', 'Novo'),
-    ('D', 'Em Destaque'),
-    ('P', 'Promoção'),
+    ('N', 'Nuevovo'),
+    ('D', 'Destacado'),
+    ('P', 'Promoción'),
 )
 
 class UserProfile(models.Model):
     class Meta:
-        verbose_name="Perfi"
+        verbose_name="Perfil"
     user = models.OneToOneField(settings.AUTH_USER_MODEL,
                                 on_delete=models.CASCADE)
-    cpf = BRCPFField("CPF")
-    full_name = models.CharField("Nome Completo", max_length=200)
+    full_name = models.CharField("Nombre Completo", max_length=200)
     cell_number = models.CharField("Celular", max_length=15, blank=True, null=True)
 
     def __str__(self):
@@ -60,7 +59,7 @@ class Category(models.Model):
 
 class Item(models.Model):
     class Meta:
-        verbose_name="Produto"
+        verbose_name="Producto"
         ordering = ['id']
     title = models.CharField(max_length=200)
     description = models.TextField()
@@ -85,7 +84,7 @@ class Item(models.Model):
 
 class OrderItem(models.Model):
     class Meta:
-        verbose_name="ItemsCarrinho"
+        verbose_name="Articulos de Carrito"
     user_order = models.ForeignKey('Order', on_delete=models.CASCADE, blank=True, null=True)
     item = models.ForeignKey('Item', on_delete=models.CASCADE) # if the item was deleted, the orderitem will be removed also.
     quantity = models.IntegerField(default=1)
@@ -108,24 +107,24 @@ class Order(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, # user currently logged in django
                              on_delete=models.CASCADE,
                              verbose_name="Cliente")
-    start_date = models.DateTimeField("Iniciado em:", auto_now_add=True)
+    start_date = models.DateTimeField("Iniciado en:", auto_now_add=True)
     finished = models.BooleanField("Finalizado", default=False) # this field can be replaced, if date is not set it means the it is not finished
-    finished_date = models.DateTimeField("Finalizado em:", blank=True, null=True)
+    finished_date = models.DateTimeField("Finalizado en:", blank=True, null=True)
     items = models.ManyToManyField('OrderItem')
-    billing_address = models.ForeignKey('BillingAddress', verbose_name="Endereço",
+    billing_address = models.ForeignKey('BillingAddress', verbose_name="Dirección",
                                         on_delete=models.CASCADE,
                                         blank=True, null=True)
     paid = models.BooleanField("Pago", default=False)
-    payment = models.ForeignKey('mercadopago_payment.Payment', verbose_name="Pagamento", related_name="mercadopago",
+    payment = models.ForeignKey('mercadopago_payment.Payment', verbose_name="Pago", related_name="mercadopago",
                                 on_delete=models.CASCADE,
                                 blank=True, null=True)
     coupon = models.ForeignKey('Coupon', verbose_name="Cupom",
                                 on_delete=models.CASCADE,
                                 blank=True, null=True)
-    on_the_road = models.BooleanField("Na estrada", default=False)
-    delivered = models.BooleanField("Entregue", default=False)
-    refund_requested = models.BooleanField("Desistencia Solicitada", default=False)
-    refund_accepted = models.BooleanField("Desistencia Aceita", default=False)
+    on_the_road = models.BooleanField("En camino", default=False)
+    delivered = models.BooleanField("Entregado", default=False)
+    refund_requested = models.BooleanField("Devolución solicitada", default=False)
+    refund_accepted = models.BooleanField("Devolución aceptada", default=False)
     # ref_code = models.CharField(max_length=32, blank=True, null=True)
     ref_code = models.UUIDField(blank=True, null=True)
 
@@ -156,7 +155,7 @@ class Order(models.Model):
 
 class BillingAddress(models.Model):
     class Meta:
-        verbose_name="Endereço"
+        verbose_name="Dirección"
     user = models.ForeignKey(settings.AUTH_USER_MODEL, # user currently logged in django
                              on_delete=models.CASCADE)
     address = models.CharField(max_length=250)
@@ -176,7 +175,7 @@ class BillingAddress(models.Model):
 
 class Coupon(models.Model):
     class Meta:
-        verbose_name="Cupom"
+        verbose_name="Cupón"
     code = models.CharField(max_length=15)
     amount = models.DecimalField(max_digits=7, decimal_places=2)
     is_active = models.BooleanField(default=True)
@@ -186,7 +185,7 @@ class Coupon(models.Model):
 
 class Refund(models.Model):
     class Meta:
-        verbose_name="Desistência"
+        verbose_name="Devolución"
     user_order = models.ForeignKey('Order',
                                     on_delete=models.CASCADE)
     reason = models.TextField()

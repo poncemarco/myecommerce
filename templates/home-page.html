@@ -38,7 +38,7 @@
           <!-- Links -->
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-              <a class="nav-link" href="/">Tudo
+              <a class="nav-link" href="/">Todo
                 <span class="sr-only">(current)</span>
               </a>
             </li>
@@ -78,7 +78,7 @@
                 {% else %}
                   <img src="{{ product.image.url }}" height="250px" style="filter: grayscale(1);">
                   <div class="text-block">
-                    <h4>Indisponível</h4>
+                    <h4>No disponible</h4>
                   </div>
                 {% endif %}
                 </a>
@@ -112,7 +112,7 @@
                   {% if product.category %}
                     Categoria: <a href="{% url 'home-page' product.category.slug %}">{{ product.category }}</a>
                   {% else %}
-                    Categoria: Outros
+                    Categoria: Otros
                   {% endif %}
                 </div>
 
@@ -145,7 +145,7 @@
 
           {% empty %}
           <div class="col-lg-12 mb-4">
-            <strong class='text-center'>Nenhum produto encontrado!</strong>
+            <strong class='text-center'>Nuevo producto encontrado</strong>
           </div>
           {% endfor %}
 

@@ -50,7 +50,7 @@ function get_error_message(code_or_message) {
       '326': 'Confira a data.', // 'invalid parameter cardExpirationYear'
 
        // uncommon client-side issues messages of incorrect data
-      'El bin \'0\' no puede tener menos de 6 dígitos': 'Sequência de digítos inválida.',
+      'El bin \'0\' no puede tener menos de 6 dígitos': 'Secuencia de de dígtos inválida.',
       'invalid expiration_year': 'Ano de vencimento inválido.',
       'an error occurred doing POST card_token': 'Erro no processamento com o servidor da pagadora. Confira os dados e tente novamente.',
     
@@ -69,7 +69,7 @@ function get_error_message(code_or_message) {
     if (code_or_message in messages) {
       return messages[code_or_message]
     } else {
-      return 'Pagamento não realizado! Algum erro desconhecido ocorreu. Confira os dados e tente novamente.'
+      return 'Pago no realizado! Algun error desconocido ocurrió. Ingresa los datos nuevamente.'
     }
 }
 
@@ -108,7 +108,7 @@ const cardForm = mp.cardForm({
         cardholderName: {
             id: 'form-checkout__cardholderName',
             // placeholder: 'Cardholder name',
-            placeholder: 'Titular do cartão',
+            placeholder: 'Titular de carjeta',
         },
         cardholderEmail: {
             id: 'form-checkout__cardholderEmail',
@@ -117,7 +117,7 @@ const cardForm = mp.cardForm({
         cardNumber: {
             id: 'form-checkout__cardNumber',
             // placeholder: 'Card number',
-            placeholder: 'Número do cartão',
+            placeholder: 'Número de carjeta',
         },
         expirationDate: {
             id: 'form-checkout__expirationDate',
@@ -132,20 +132,20 @@ const cardForm = mp.cardForm({
             // placeholder: 'Total installments'
             placeholder: 'Parcelas'
         },
-        identificationType: {
-            id: 'form-checkout__identificationType',
-            // placeholder: 'Document type'
-            placeholder: 'Tipo de documento'
-        },
-        identificationNumber: {
-            id: 'form-checkout__identificationNumber',
-            // placeholder: 'Document number'
-            placeholder: 'Número do documento'
-        },
+        // identificationType: {
+        //     id: 'form-checkout__identificationType',
+        //     // placeholder: 'Document type'
+        //     placeholder: 'Tipo de documento'
+        // },
+        // identificationNumber: {
+        //     id: 'form-checkout__identificationNumber',
+        //     // placeholder: 'Document number'
+        //     placeholder: 'Número do documento'
+        // },
         issuer: {
             id: 'form-checkout__issuer',
             // placeholder: 'Issuer'
-            placeholder: 'Banco emissor'
+            placeholder: 'Banco emisor'
         }
     },
     callbacks: {
@@ -200,8 +200,8 @@ const cardForm = mp.cardForm({
                 amount,
                 token,
                 installments,
-                identificationNumber,
-                identificationType
+                // identificationNumber,
+                // identificationType
             } = cardForm.getCardFormData();
 
             fetch("/payments/process/", {
@@ -219,8 +219,8 @@ const cardForm = mp.cardForm({
                     transaction_amount: Number(amount),
                     installments: Number(installments),
                     // description: "Ecommerce products",
-                    type: identificationType,
-                    number: identificationNumber,
+                    // type: identificationType,
+                    // number: identificationNumber,
                 }),
             })
             .then(function(value) { // Promise

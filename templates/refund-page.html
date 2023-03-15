@@ -5,12 +5,12 @@
   <main >
     <div class="container">
 
-      <h2 class="my-5 h2 text-center">Formulário para Requisição de Refundo</h2>
+      <h2 class="my-5 h2 text-center">Formulario para Devolución</h2>
 
         <form action="." method="POST" class="stripe-form" id="stripe-form">
             {% csrf_token %}
             {{ refund_form|crispy }}
-            <button type="submit" class="btn btn-primary float-right">Enviar Solicitação</button>
+            <button type="submit" class="btn btn-primary float-right">Enviar Solicitud</button>
         </form>
     </div>
   </main>

@@ -12,7 +12,7 @@
     <div class="container wow fadeIn">
 
       <!-- Heading -->
-      <h2 class="my-5 h2 text-center">Sua Conta</h2>
+      <h2 class="my-5 h2 text-center">Su Cuenta</h2>
 
       {% include 'profile-menu.html' %}
 
@@ -21,13 +21,13 @@
         {% if billing_address_default %}
           <div class="card container">
             <div class="card-body">
-              <div class="float-right col-md-4 mb-4">Endereço Padrão de Envio</div>
-              <div class="card-text">Cidade: {{ billing_address_default.city }}, Estado: {{ billing_address_default.state }}</div>
-              <div class="card-text">Endereço: {{ billing_address_default.address }}, Número: {{ billing_address_default.number }}</div>
-              <div class="card-text">CEP: {{ billing_address_default.zipcode }}</div>
+              <div class="float-right col-md-4 mb-4">Dirección de envio</div>
+              <div class="card-text">Ciudad: {{ billing_address_default.city }}, Estado: {{ billing_address_default.state }}</div>
+              <div class="card-text">Dirección: {{ billing_address_default.address }}, Número: {{ billing_address_default.number }}</div>
+              <div class="card-text">Código Psotal: {{ billing_address_default.zipcode }}</div>
               <form method="POST" action="{% url 'profile-user-address' 'delete' billing_address_default.address billing_address_default.number billing_address_default.zipcode 'profile' %}">
                 {% csrf_token %}
-                <button class="btn btn-danger btn-sm float-right" type="submit">Deletar</button>
+                <button class="btn btn-danger btn-sm float-right" type="submit">Borrar</button>
               </form>
             </div>
           </div>
@@ -36,7 +36,7 @@
         {% if billing_addresses %}
           <div class="d-flex justify-content-center">
             <button class="btn btn-primary btn-lg btn-block col-md-6" onclick="{document.getElementById('change_address').style.display = 'block';}">
-              Definir Endereço Padrão
+              Definir como dirección de envio
             </button>
           </div>
           <div id="change_address" style="display: none;">
@@ -46,34 +46,34 @@
                   <div class="float-right">
                     <form method="POST" action="{% url 'profile-user-address' 'update' billing.address billing.number billing.zipcode 'profile' %}">
                       {% csrf_token %}
-                      <button class="btn btn-success btn-md float-right" type="submit">Tornar padrão</button>
+                      <button class="btn btn-success btn-md float-right" type="submit">Hacer preferida</button>
                     </form>
                     <form method="POST" action="{% url 'profile-user-address' 'delete' billing.address billing.number billing.zipcode 'profile' %}">
                       {% csrf_token %}
-                      <button class="btn btn-danger btn-sm float-right" type="submit">Deletar</button>
+                      <button class="btn btn-danger btn-sm float-right" type="submit">Borrar</button>
                     </form>
                   </div>
                 <div style="width: fit-content;">{{forloop.counter}}</div>
-                <div class="card-text">Cidade: {{ billing.city }}, Estado: {{ billing.state }}</div>
-                <div class="card-text">Endereço: {{ billing.address }}, Número: {{ billing.number }}</div>
-                <div class="card-text">CEP: {{ billing.zipcode }}</div>
+                <div class="card-text">Cidadad: {{ billing.city }}, Estado: {{ billing.state }}</div>
+                <div class="card-text">Dirección: {{ billing.address }}, Número: {{ billing.number }}</div>
+                <div class="card-text">Código Postal: {{ billing.zipcode }}</div>
                 </div>
               </div>
           {% endfor %}
           </div>
         {% endif %}
         {% if not billing_addresses and not billing_address_default %}
-          <div class="text-center card-title">Não há endereços registrados.</div>
+          <div class="text-center card-title">No hay direcciones registradas.</div>
         {% endif %}
 
         {% if billing_addresses|length < 5 %}
           <div id="add_address" class="d-flex justify-content-center">
             <button class="btn btn-dark btn-lg btn-block col-md-6" onclick="document.getElementById('new_address').style.display = 'block';">
-              Adicionar Endereço
+              Agregar dirección
             </button>
           </div>
         {% else %}
-          <div class="text-center card-title mt-3">Para cadastrar novos endereços, delete um dos existentes.<br>Limite máximo atingido (5).</div>
+          <div class="text-center card-title mt-3">Para agregar nuevas direccioenes, elimina existentes<br>Limite máximo alcanzado (5).</div>
         {% endif %}
         {% if new_address_form %}
           {% if display_form == 'none' %}
@@ -84,7 +84,7 @@
             <form class="card-body" method="POST" action="{% url 'profile-user-address' 'create' 'profile' %}">
               {% csrf_token %}
               {{ new_address_form|crispy }}
-              <button class="btn btn-primary btn-lg btn-block" type="submit">Adicionar novo Endereço</button>
+              <button class="btn btn-primary btn-lg btn-block" type="submit">Agreager nueva dirección</button>
             </form>
           </div>
         {% endif %}
