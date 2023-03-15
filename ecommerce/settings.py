@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("SECRET_KEY", default="development")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DEBUG", default="1")
+DEBUG = os.environ.get("DEBUG", default="0")
 
 ALLOWED_HOSTS = []
 
@@ -117,13 +117,9 @@ WSGI_APPLICATION = 'ecommerce.wsgi.application'
 # }
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'ecomm_database',
-        'USER': 'postgres',
-        'PASSWORD': 'pass_ecomm',
-        'HOST': 'db',
-        'PORT': 5432,
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": os.path.join(BASE_DIR, 'db.sqlite3')
     }
 }
 

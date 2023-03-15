@@ -34,6 +34,7 @@ class ProfileView(View):
         """ Updating user data """
         if self.request.user.is_authenticated:
             user_profile = self.request.user.userprofile
+            print(user_profile)
             user_info_form = UserInfoForm(self.request.POST or None, instance=user_profile)
 
             if user_info_form.is_valid():
